@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './styles.css';
 
-export default function App() {
-	return (
-		<div className="App">
-			<header className="App-header">
-				<h1 className="App-title">Мой топ фото</h1>
-			</header>
-			<p className="App-intro">Здесь будут мои самые залайканые фото</p>
-		</div>
-	);
+class App extends Component {
+	render() {
+		const { name, lastname, age } = this.props.user;
+		return (
+			<div className="App">
+				<header className="App-header">
+					<h1 className="App-title">Мой топ фото</h1>
+				</header>
+				<p>
+					Привет из App, {name} {lastname}
+				</p>
+				<p>Тебе уже {age}?</p>
+			</div>
+		);
+	}
 }
+
+const mapStateToProps = (store) => {
+	console.log(store);
+	return {
+		user: store.user
+	};
+};
+
+export default connect(mapStateToProps)(App);
